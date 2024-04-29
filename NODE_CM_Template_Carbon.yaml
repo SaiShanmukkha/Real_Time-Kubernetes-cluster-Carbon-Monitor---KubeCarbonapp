@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: carbon-app
+  name: ip-172-31-16-206_Carbon_CM
+data:
+  region: "us-west-2"
+  instance-id: "i-0ade3e73d83d825d9"
+  instance-type: "t3.xlarge"
+  availability-zone: "us-west-2b"
+  public-ip: "54.245.222.62"
+  private-ip: "172.31.16.206"
+  os: "Linux Ubuntu 22.04"

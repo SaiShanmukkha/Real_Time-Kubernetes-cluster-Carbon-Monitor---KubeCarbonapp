@@ -1,0 +1,26 @@
+{
+  "name": "carbokube",
+  "version": "1.0.0",
+  "description": "A kubernetes carbon emission calculator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Carbon",
+    "Kubernetes"
+  ],
+  "author": "Sai Shanmukkha Surapaneni",
+  "license": "ISC",
+  "dependencies": {
+    "@grnsft/if-plugins": "^0.3.2",
+    "@grnsft/if-unofficial-plugins": "^0.3.1",
+    "@kubernetes/client-node": "^0.20.0",
+    "cubic-spline": "^3.0.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "install": "^0.13.0",
+    "npm": "^10.6.0",
+    "prom-client": "^15.1.2"
+  }
+}
