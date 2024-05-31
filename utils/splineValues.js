@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-// Function to load JSON data
 function loadJsonFile(filePath) {
     return new Promise((resolve, reject) => {
         fs.readFile(filePath, { encoding: 'utf8' }, (err, data) => {
@@ -11,7 +10,6 @@ function loadJsonFile(filePath) {
     });
 }
 
-// Function to fetch power values based on instance type
 async function fetchPowerValues(instanceType) {
     try {
         const filePath = './data/aws-instances.json'; 

@@ -14,27 +14,6 @@ async function fetchMetadata(instanceType) {
     return cloudMD[0];
 }
 
-// const CURVE = [0.12, 0.32, 0.75, 1.02];
-// const POINTS = [0, 10, 50, 100];
-
-// async function calculateEnergy(duration, instanceType, cpuUtilization, cpuThermalDesignPower) {
-//     const metadata = await fetchMetadata(instanceType);
-//     const energyWithoutAllocation = calculateSPINEEnergy(duration, cpuUtilization, cpuThermalDesignPower);
-//     const total = metadata['vcpus-total'];
-//     const allocated = metadata['vcpus-allocated'];
-//     if (allocated !== undefined && total !== undefined && total !== 0) {
-//         return energyWithoutAllocation * (allocated / total);
-//     }
-//     return energyWithoutAllocation;
-// }
-
-
-// function calculateSPINEEnergy(duration, cpuUtilization, cpuThermalDesignPower) {
-//     const spline = new Spline(POINTS, CURVE);
-//     const wattage = spline.at(cpuUtilization) * cpuThermalDesignPower;
-//     return (wattage * duration) / 3600 / 1000; // Convert to kWh
-// }
-
 
 async function calculateEnergy(duration, instanceType, cpuUtilization) {
     const metadata = await fetchMetadata(instanceType);
