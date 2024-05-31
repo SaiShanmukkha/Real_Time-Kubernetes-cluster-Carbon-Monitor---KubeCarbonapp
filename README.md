@@ -1,16 +1,16 @@
-﻿# KubeCarbonapp - Real Time Kubernetes Carbon & Energy Metrics App (For Cluster's deployed on AWS Cloud EC2 or EKS Only)
+﻿# KubeCarbonapp - Real-Time Kubernetes Carbon & Energy Metrics App (For Cluster deployed on AWS Cloud EC2 or EKS Only)
 
 ## ===> Note:
 
-- **If you are using AWS Elastic Kubernetes Service (EKS) with AWS Fargate, you wont be able to use this app. Because AWS Fargate is serverless providing option, which doesn't give access to the underlying server.**
+- **If you are using AWS Elastic Kubernetes Service (EKS) with AWS Fargate, you won't be able to use this app. Because AWS Fargate is a serverless providing option, which doesn't give access to the underlying server.**
 
-- **Below steps are only for carbon app monitoring setup. You have to do alot more setup on the side of kubernetes cluster Like setting up kube-prometheus-stack, creating configMaps' for all nodes in the cluster, providing kubeConfig access to this app, etc.**
+- **The Below steps are only for carbon app monitoring setup. You have to do a lot more setup on the side of Kubernetes cluster Like setting up kube-prometheus-stack, creating configMaps' for all nodes in the cluster, providing kubeConfig access to this app, etc.**
 
 - **Steps to setup kubernetes cluster for this app, provided in detail in the report as integrating Kubernetes isn't straightforward and requires careful handling.**
 
 ### Overview
 
-This App  is a Node.js application designed to monitor, calculate and report on energy consumption and carbon emissions metrics for kubernetes cluster nodes. It integrates with Prometheus to expose custom metrics through a expressJS server. This application fetches and processes data periodically to update the metrics based on node data, CPU utilization, and other relevant information.
+This App  is a Node.js application designed to monitor, calculate, and report energy consumption and carbon emissions metrics for Kubernetes cluster nodes. It integrates with Prometheus to expose custom metrics through an express server. This application fetches and processes data periodically to update the metrics based on node data, CPU utilization, and other relevant information.
 
 ### Features
 
@@ -23,11 +23,11 @@ This App  is a Node.js application designed to monitor, calculate and report on 
 #### Prerequisites
 
 - Node.js runtime installed on your machine.
-- Live kubernetes cluster with accessable in-cluster prometheus scraper to query CPU data of resources along with it's `.kube/config` file.
-- In Cluster prometheus setup to scrape metrics from this service.
-- API token from `ElectricityMaps` to get live Carbon Intensity of a region.
+- Live Kubernetes cluster with accessable in-cluster Prometheus scraper to query CPU data of resources along with its `.kube/config` file.
+- In Cluster Prometheus set to scrape metrics from this service.
+- API token from `ElectricityMaps` to get the live Carbon Intensity of a region.
 - Kubernetes Cluster NodePort Service URL:Port
-- This app expects ConfigMap setted up for every node in a namespace `carbon-app` with below data:
+- This app expects ConfigMap set up for every node in a namespace `carbon-app` with below data:
     Example Config: `<NODE-NAME-without-hyphen>.carbon.app.cmap`
     
     ```yaml
@@ -46,13 +46,13 @@ This App  is a Node.js application designed to monitor, calculate and report on 
             os: "Linux Ubuntu 22.04"
     ```
 
-- Whenever there is modifications in number of nodes in kubernetes cluster, this app is able to detect them automatically and applies necessary changes.
+- Whenever there are modifications in a number of nodes in the Kubernetes cluster, this app is able to detect them automatically and applies necessary changes.
 
 ### Setting up this app along with Prometheus & Grafana
 
-1. First build the container image using `./builder.ps1` powershell script.
+1. First build the container image using `./builder.ps1` PowerShell script.
 
-2. Run this image in the kubernetes cluster's `Master Node` as standalone docker cnotainer by mapping it's port to one of the host port ( access to kubeConfig is obtained by default) or any other server (provide access to `.kube/config` file). Provide `KUBE_CLUSTER_PROMETHEUS` and `ELECTRICITY_MAPS_API_KEY` environmental variables.
+2. Run this image in the Kubernetes cluster's `Master Node` as a standalone docker container by mapping its port to one of the host ports ( access to kubeConfig is obtained by default) or any other server (provide access to `.kube/config` file). Provide `KUBE_CLUSTER_PROMETHEUS` and `ELECTRICITY_MAPS_API_KEY` environmental variables.
 
     ```bash
         docker run -d -v /home/ubuntu/.kube/config:/root/.kube/config -it -p 5100:3000 \
@@ -60,8 +60,8 @@ This App  is a Node.js application designed to monitor, calculate and report on 
             -e ELECTRICITY_MAPS_API_KEY=<your_electricity_maps_api_key> \
             saishanmukkha/carbonprometheus:latest
     ```
-    **Note:** Here we are using port `5100` on host make sure it is available or change to another.
-3. Now setup prometheus to scrape the carbon and energy metrics from this container `<hostname>:<port>/metrics` endpoint
+    **Note:** Here we are using port `5100` on the host to make sure it is available or changed to another.
+3. Now set Prometheus to scrape the carbon and energy metrics from this container `<hostname>:<port>/metrics` endpoint
     ```bash
         docker run --name Prometheus -d -v /path/to/custom/prometheus.yml:/opt/bitnami/prometheus/conf/prometheus.yml bitnami/prometheus:latest
     ```
@@ -83,7 +83,7 @@ This App  is a Node.js application designed to monitor, calculate and report on 
     ```bash
         docker run -d --name=grafana -p 3000:3000 grafana/grafana
     ```
-4. Login into grafana (initial username `admin` and password `admin`) and setup prometheus as source under data sources and provide prometheus container `host-url:port` endpoint.
+4. Login into grafana (initial username `admin` and password `admin`) and set up Prometheus as source under data sources and provide Prometheus container `host-url:port` endpoint.
 
 ### How to Customize this app?
 1. Download all these files in a folder
@@ -122,10 +122,10 @@ The application logs significant events including updates to the metrics and any
 
 #### Post Customization
 
-build the docker image using `builder.ps1` powershell script and modify its variables before pushing it to dockerhub registry.
+build the docker image using `builder.ps1` PowerShell script and modify its variables before pushing it to the docker hub registry.
 
 
 ### Contact:
 
-For any setup, related queries email: siv30@txstate.edu
+For any setup or related queries, contact me at saishanmukkha@gmail.com
 
