@@ -127,6 +127,6 @@ build the docker image using `builder.ps1` powershell script and modify its vari
 
 ### Contact:
 
-For any setup, related queries email: (saishanmukkha@gmail.com)[mailto:saishanmukkha@gmail.com]
+For any setup-related queries, email: [saishanmukkha@gmail.com](mailto:saishanmukkha@gmail.com)
 
 
